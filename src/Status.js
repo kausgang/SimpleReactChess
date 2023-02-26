@@ -45,7 +45,11 @@ function Status(props) {
     // setData([...data1, { cp: props.cp_value }]);
     setData([
       ...data1,
-      { cp: props.cp_value, move: props.game.history().pop() },
+      {
+        cp: props.cp_value,
+        move: props.game.history().pop(),
+        move_number: props.game.history().length,
+      },
     ]);
   }, [props.cp_value]);
 
@@ -71,7 +75,7 @@ function Status(props) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="move_number" />
       <YAxis axisLine={false} />
       <Tooltip />
       <Legend />
