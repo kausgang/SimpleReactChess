@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Grid from "@mui/material/Unstable_Grid2";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 import axios from "axios";
 import ShowMoves from "./ShowMoves";
@@ -117,7 +118,7 @@ function App() {
       // console.log(sideToMove);
 
       if (last_line !== null) {
-        console.log(last_line.input);
+        // console.log(last_line.input);
         let cp_substr_start = last_line.input.indexOf("cp") + 3;
         let cp_substr_end = last_line.input.indexOf("nodes") - 1;
         let cp_value = last_line.input.substring(
@@ -181,15 +182,6 @@ function App() {
             alignItems="center"
           >
             <EngineLevel onsetDepth={onsetDepth} />
-            <ToggleButtonGroup
-              color="primary"
-              value={orientation}
-              exclusive
-              onChange={setPlayAs}
-            >
-              {/* <ToggleButton value="white">white</ToggleButton> */}
-              <ToggleButton value="black">Play as Black</ToggleButton>
-            </ToggleButtonGroup>
           </Stack>
           <Status cp_value={cp} />
           <ShowMoves moves={moves} />
@@ -201,11 +193,21 @@ function App() {
             game={game}
             position={fen}
             changeSideToMove={changeSideToMove}
-            // cp={cp}
+            cp={cp}
             updateCp={updateCp}
             depth={depth}
             updateMoves={updateMoves}
           />
+          <ToggleButtonGroup
+            justifyContent="right"
+            color="primary"
+            value={orientation}
+            exclusive
+            onChange={setPlayAs}
+          >
+            {/* <ToggleButton value="white">white</ToggleButton> */}
+            <ToggleButton value="black">Play as Black</ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
 
         {/* <MoveTable moves={moves} /> */}

@@ -19,6 +19,7 @@ function Board(props) {
     let depth = 5;
     engine.postMessage("position fen " + fen);
     engine.postMessage("go depth " + depth);
+    let oldCp = props.cp;
 
     engine.onmessage = function (line) {
       // console.log(line.data);
@@ -36,33 +37,35 @@ function Board(props) {
         );
 
         props.updateCp(cp_value / 100);
-      }
+        // }
 
-      try {
-        props.game.move({
-          from: sourceSquare,
-          to: targetSquare,
-          promotion: "q", // always promote to a queen for example simplicity
-        });
+        try {
+          props.game.move({
+            from: sourceSquare,
+            to: targetSquare,
+            promotion: "q", // always promote to a queen for example simplicity
+          });
 
-        setFen(props.game.fen()); //fen holds the position reached after dropping this piece
+          setFen(props.game.fen()); //fen holds the position reached after dropping this piece
 
-        // calculate_cp(fen);
-        // check which side to move
-        let game_history = props.game.history({ verbose: true });
-        // console.log(game_history);
-        let sideToMove = game_history[game_history.length - 1].color;
-        console.log(sideToMove);
+          // calculate_cp(fen);
+          // check which side to move
+          let game_history = props.game.history({ verbose: true });
+          // console.log(game_history);
+          let sideToMove = game_history[game_history.length - 1].color;
+          console.log(sideToMove);
 
-        // switch side to let the engine make move
-        sideToMove === "w"
-          ? props.changeSideToMove("b")
-          : props.changeSideToMove("w");
+          // switch side to let the engine make move
+          sideToMove === "w"
+            ? props.changeSideToMove("b")
+            : props.changeSideToMove("w");
 
-        // update move table
-        props.updateMoves();
-      } catch (error) {
-        console.log("illigal move");
+          // update move table
+          props.updateMoves();
+        } catch (error) {
+          console.log("illigal move");
+          props.updateCp(oldCp);
+        }
       }
     };
   };
