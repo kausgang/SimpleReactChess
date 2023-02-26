@@ -145,26 +145,6 @@ function App() {
     setCp(cp_value);
   };
 
-  const showMoves = () => {
-    // console.log(game.pgn({ maxWidth: 10, newline: "\n" }));
-    setMoves(game.pgn({ maxWidth: 10, newline: "\n" }));
-  };
-
-  // const sendToServer = () => {
-  //   axios
-  //     .get("http://localhost:4000/")
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch(function (error) {
-  //       // handle error
-  //       console.log(error);
-  //     })
-  //     .finally(function () {
-  //       // always executed
-  //     });
-  // };
-
   const updateMoves = () => {
     setMoves(game.pgn({ maxWidth: 10, newline: "\n" }));
     // setMoves(game.pgn().split(" "));
@@ -183,7 +163,7 @@ function App() {
           >
             <EngineLevel onsetDepth={onsetDepth} />
           </Stack>
-          <Status cp_value={cp} />
+          <Status cp_value={cp} game={game} />
           <ShowMoves moves={moves} />
         </Grid>
         <Grid xs={8}>

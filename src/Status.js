@@ -41,9 +41,12 @@ function Status(props) {
     // }
 
     data1 = [...data];
-    // console.log(data1);
-    // data1.shift();
-    setData([...data1, { cp: props.cp_value }]);
+
+    // setData([...data1, { cp: props.cp_value }]);
+    setData([
+      ...data1,
+      { cp: props.cp_value, move: props.game.history().pop() },
+    ]);
   }, [props.cp_value]);
 
   return (
@@ -75,7 +78,7 @@ function Status(props) {
       <ReferenceLine y={0.5} stroke="red" label="Score=0.5" />
       {/* <ReferenceLine y={9800} label="Max" stroke="red" /> */}
       <Line type="monotone" dataKey="cp" stroke="#8884d8" />
-      {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+      <Line type="monotone" dataKey="move" stroke="#82ca9d" />
     </LineChart>
     // </ResponsiveContainer>
   );
