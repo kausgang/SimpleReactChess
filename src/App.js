@@ -8,7 +8,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 // import MoveTable from "./MoveTable";
 import EngineLevel from "./EngineLevel";
 import Status from "./Status";
-// import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -125,6 +125,8 @@ function App() {
     setGameStarted(isGamgstarted);
   };
 
+  // const saveGame = () => {};
+
   return (
     <>
       <Grid container spacing={"20%"}>
@@ -157,13 +159,13 @@ function App() {
             {/* <ToggleButton value="white">white</ToggleButton> */}
             <ToggleButton value="black">Play as Black</ToggleButton>
           </ToggleButtonGroup>
+          {/* <Button variant="contained" onClick={saveGame}>
+            save
+          </Button> */}
         </Grid>
 
         {/* <MoveTable moves={moves} /> */}
 
-        {/* <Button variant="contained" onClick={sendToServer}>
-        send To Server
-      </Button> */}
         {/* <Button variant="contained" onClick={pgn}>
         PGN
       </Button> */}

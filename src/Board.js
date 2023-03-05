@@ -12,18 +12,18 @@ function Board(props) {
   var engine = new Worker("stockfish.js");
 
   useEffect(() => {
-    // check for gameover
-    if (game.isCheckmate()) {
-      alert("Checkmate!");
-    }
-    if (game.isDraw()) {
-      alert("Draw!");
-    }
-    if (game.isStalemate()) {
-      alert("Stalemate!");
-    }
-
     setFen(props.game.fen());
+
+    // // check for gameover
+    // if (game.isCheckmate()) {
+    //   alert("Checkmate!");
+    // }
+    // if (game.isDraw()) {
+    //   alert("Draw!");
+    // }
+    // if (game.isStalemate()) {
+    //   alert("Stalemate!");
+    // }
   });
 
   const calculate_cp = (fen) => {
@@ -85,6 +85,17 @@ function Board(props) {
       // calculate_cp(fen);
 
       calculate_cp(props.game.fen());
+
+      // check for gameover
+      if (game.isCheckmate()) {
+        alert("Checkmate!");
+      }
+      if (game.isDraw()) {
+        alert("Draw!");
+      }
+      if (game.isStalemate()) {
+        alert("Stalemate!");
+      }
     } catch (error) {
       console.log("illigal move");
     }
