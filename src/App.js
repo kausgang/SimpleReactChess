@@ -12,8 +12,7 @@ import Button from "@mui/material/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Grid from "@mui/material/Unstable_Grid2";
-// import Stack from "@mui/material/Stack";
-// import Box from "@mui/material/Box";
+import { saveGame } from "./DB/saveGame";
 
 import ShowMoves from "./ShowMoves";
 
@@ -93,10 +92,12 @@ function App() {
         // }
       }
 
-      if (best_move[1] !== null) game.move(best_move[1]);
+      try {
+        if (best_move[1] !== null) game.move(best_move[1]);
+        setFen(game.fen());
+        updateMoves();
+      } catch (err) {}
 
-      setFen(game.fen());
-      updateMoves();
       // check for gameover
       if (game.isCheckmate()) {
         alert("Checkmate!");
@@ -125,7 +126,17 @@ function App() {
     setGameStarted(isGamgstarted);
   };
 
-  // const saveGame = () => {};
+  const onSaveGame = () => {
+    if (orientation === "white") {
+      game.header("White", "Human");
+      game.header("Black", "Computer");
+    } else {
+      game.header("White", "Computer");
+      game.header("Black", "Human");
+    }
+
+    saveGame(game.pgn());
+  };
 
   return (
     <>
@@ -159,9 +170,9 @@ function App() {
             {/* <ToggleButton value="white">white</ToggleButton> */}
             <ToggleButton value="black">Play as Black</ToggleButton>
           </ToggleButtonGroup>
-          {/* <Button variant="contained" onClick={saveGame}>
-            save
-          </Button> */}
+          <Button variant="contained" onClick={onSaveGame}>
+            copy to clipboard
+          </Button>
         </Grid>
 
         {/* <MoveTable moves={moves} /> */}
