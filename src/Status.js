@@ -53,7 +53,7 @@ function Status(props) {
       <Tooltip />
       <Legend />
       <ReferenceLine y={0.5} stroke="red" label="Score=0.5" />
-      <Line type="monotone" dataKey="cp" alphabetic={true} stroke="#8884d8" />
+      <Line type="monotone" dataKey="cp" stroke="#8884d8" />
       <Line type="monotone" dataKey="move" stroke="#82ca9d" />
     </LineChart>
   );
